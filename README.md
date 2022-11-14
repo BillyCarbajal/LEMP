@@ -144,8 +144,9 @@ Ahora crearemos en la misma carpeta un archivo llamado "script-mysql.sh" en el i
 
 Una vez hecho todo esto guardamos el archivo.
 
-### Paso
-
+### Paso 5. Comprobamos que el servidor funciona:
+Servidor Billy-balanceador:
+ejecutamos un "vagrant ssh Billy-balanceador"
 
 
 
