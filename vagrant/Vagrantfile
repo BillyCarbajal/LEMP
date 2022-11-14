@@ -1,0 +1,59 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+
+	Vagrant.configure("2") do |config|
+		config.vm.define "Billy-balanceador" do |ba|
+			ba.vm.hostname = "Billy-balanceador"
+			ba.vm.box = "generic/debian11"
+			ba.vm.network "private_network", ip:"192.168.100.2",
+				virtualbox__intnet: "priv1"
+			ba.vm.network "public_network"
+			ba.vm.provider "virtualbox" do |v|
+				v.memory = 1024
+				v.cpus = 1
+			end
+			ba.vm.provision :shell, privileged:true, path: "script-balanceador.sh"
+		end
+		config.vm.define "Billy-nginx1" do |web1|
+			web1.vm.hostname = "Billy-nginx1"
+			web1.vm.box = "generic/debian11"
+			web1.vm.network "private_network", ip:"192.168.100.3",
+				virtualbox__intnet: "priv1"
+			web1.vm.network "private_network", ip:"192.168.200.3",
+				virtualbox__intnet: "priv2"
+			web1.vm.provider "virtualbox" do |v|
+				v.memory = 1024
+				v.cpus = 1
+			end
+			web1.vm.provision :shell, privileged:true, path: "script-nginx1.sh"
+		end
+		config.vm.define "Billy-nginx2" do |web2|
+			web2.vm.hostname = "billy-nginx2"
+			web2.vm.box = "generic/debian11"
+			web2.vm.network "private_network", ip:"192.168.100.4",
+				virtualbox__intnet: "priv1"
+			web2.vm.network "private_network", ip:"192.168.200.4",
+				virtualbox__intnet: "priv2"
+			web2.vm.provider "virtualbox" do |v|
+				v.memory = 1024
+				v.cpus = 1
+			end
+			web2.vm.provision :shell, privileged:true, path: "script-nginx2.sh"
+		end
+		config.vm.define "Billy-mysql" do |sql|
+			sql.vm.hostname = "Billy-mysql"
+			sql.vm.box = "generic/debian11"
+			sql.vm.network "private_network", ip:"192.168.200.2",
+				virtualbox__intnet: "priv2"
+			sql.vm.provider "virtualbox" do |v|
+				v.memory = 1024
+				v.cpus = 1
+			end
+			sql.vm.provision :shell, privileged:true, path: "script-mysql.sh"
+		end 
+	end
