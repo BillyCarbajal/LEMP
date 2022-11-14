@@ -145,13 +145,15 @@ Ahora crearemos en la misma carpeta un archivo llamado "script-mysql.sh" en el i
 Una vez hecho todo esto guardamos el archivo.
 
 ### Paso 5. Comprobamos que el servidor funciona:
-Servidor Billy-balanceador:
-ejecutamos un "vagrant ssh Billy-balanceador"
 
-
-
-
-
+En la terminal ejecutamos "vagrant ssh Billy-balanceador" y luego "service nginx status":
+![imagen](https://github.com/BillyCarbajal/LEMP/blob/main/img/balanceador.png)
+En la terminal ejecutamos "vagrant ssh Billy-nginx1" y luego "service nginx status" y "service php7.4-fpm status":
+![imagen2](https://github.com/BillyCarbajal/LEMP/blob/main/img/nginx1.png)
+En la terminal ejecutamos "vagrant ssh Billy-nginx2" y luego "service nginx status" y "service php7.4-fpm status":
+![imagen3](https://github.com/BillyCarbajal/LEMP/blob/main/img/nginx2.png)
+En la terminal ejecutamos "vagrant ssh Billy-mysql" y luego "service mysql status":
+![imagen4](https://github.com/BillyCarbajal/LEMP/blob/main/img/mysql.png)
 
 
 
